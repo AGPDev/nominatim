@@ -51,6 +51,14 @@ else
   sed -i "s|__IMPORT_STYLE__|full|g" ${CONFIG_FILE}
 fi
 
+# address level tuning
+
+if [ ! -z "$ADDRESS_LEVEL" ]; then
+  sed -i "s|__ADDRESS_LEVEL__|${ADDRESS_LEVEL}|g" ${CONFIG_FILE}
+else
+  sed -i "s|__ADDRESS_LEVEL__|address-levels.json|g" ${CONFIG_FILE}
+fi
+
 # if flatnode directory was created by volume / mount, use flatnode files
 
 if [ -d "${PROJECT_DIR}/flatnode" ]; then sed -i 's\^NOMINATIM_FLATNODE_FILE=$\NOMINATIM_FLATNODE_FILE="/nominatim/flatnode/flatnode.file"\g' ${CONFIG_FILE}; fi
